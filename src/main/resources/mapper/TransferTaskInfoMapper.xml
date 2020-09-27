@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gl.springboot.dao.TransferTaskInfoDao">
+
+    <sql id="columns">
+        CHUANGJSJ,RENWCRGLBSFCG,RENWLX,SHIFQL,MUDIP,ZUIHGXSJ,RENWJG,MUDDK,RENWZT,RENWID,RENWTJ
+    </sql>
+
+    <resultMap id="resultMap" type="com.gl.springboot.entity.TransferTaskInfo">
+        <result column="CHUANGJSJ" property="createTime"/>
+        <result column="RENWCRGLBSFCG" property="insertSuccess"/>
+        <result column="RENWLX" property="taskType"/>
+        <result column="SHIFQL" property="isClean"/>
+        <result column="MUDIP" property="targetIP"/>
+        <result column="ZUIHGXSJ" property="lastTime"/>
+        <result column="RENWJG" property="taskResult"/>
+        <result column="MUDDK" property="targetPort"/>
+        <result column="RENWZT" property="taskStatus"/>
+        <result column="RENWID" property="taskId"/>
+        <result column="RENWTJ" property="taskConditions"/>
+    </resultMap>
+
+    <sql id="where_sql">
+        <where>
+            <if test="insertSuccess != null">AND RENWCRGLBSFCG = #{insertSuccess}</if>
+            <if test="taskType != null">AND RENWLX = #{taskType}</if>
+            <if test="isClean != null">AND SHIFQL = #{isClean}</if>
+            <if test="targetIP != null">AND MUDIP = #{targetIP}</if>
+            <if test="lastTime != null">AND ZUIHGXSJ = #{lastTime}</if>
+            <if test="taskResult != null">AND RENWJG = #{taskResult}</if>
+            <if test="targetPort != null">AND MUDDK = #{targetPort}</if>
+            <if test="taskStatus != null">AND RENWZT = #{taskStatus}</if>
+            <if test="taskId != null">AND RENWID = #{taskId}</if>
+            <if test="taskConditions != null">AND RENWTJ = #{taskConditions}</if>
+        </where>
+    </sql>
+
+    <insert id="insertRecord" parameterType="com.gl.springboot.entity.TransferTaskInfo">
+        INSERT INTO transfer_task_info (RENWID
+        <if test="createTime != null">,CHUANGJSJ</if>
+        <if test="insertSuccess != null">,RENWCRGLBSFCG</if>
+        <if test="taskType != null">,RENWLX</if>
+        <if test="isClean != null">,SHIFQL</if>
+        <if test="targetIP != null">,MUDIP</if>
+        <if test="lastTime != null">,ZUIHGXSJ</if>
+        <if test="taskResult != null">,RENWJG</if>
+        <if test="targetPort != null">,MUDDK</if>
+        <if test="taskStatus != null">,RENWZT</if>
+        <if test="taskConditions != null">,RENWTJ</if>
+        )VALUES(#{taskId}
+        <if test="createTime != null">,#{createTime}</if>
+        <if test="insertSuccess != null">,#{insertSuccess}</if>
+        <if test="taskType != null">,#{taskType}</if>
+        <if test="isClean != null">,#{isClean}</if>
+        <if test="targetIP != null">,#{targetIP}</if>
+        <if test="lastTime != null">,#{lastTime}</if>
+        <if test="taskResult != null">,#{taskResult}</if>
+        <if test="targetPort != null">,#{targetPort}</if>
+        <if test="taskStatus != null">,#{taskStatus}</if>
+        <if test="taskConditions != null">,#{taskConditions}</if>
+        )
+    </insert>
+
+    <update id="updateRecord" parameterType="com.gl.springboot.entity.TransferTaskInfo">
+        UPDATE transfer_task_info SET
+        <trim suffix="" suffixOverrides=",">
+            <if test="createTime != null">CHUANGJSJ = #{createTime},</if>
+            <if test="insertSuccess != null">RENWCRGLBSFCG = #{insertSuccess},</if>
+            <if test="taskType != null">RENWLX = #{taskType},</if>
+            <if test="isClean != null">SHIFQL = #{isClean},</if>
+            <if test="targetIP != null">MUDIP = #{targetIP},</if>
+            <if test="lastTime != null">ZUIHGXSJ = #{lastTime},</if>
+            <if test="taskResult != null">RENWJG = #{taskResult},</if>
+            <if test="targetPort != null">MUDDK = #{targetPort},</if>
+            <if test="taskStatus != null">RENWZT = #{taskStatus},</if>
+            <if test="taskConditions != null">RENWTJ = #{taskConditions},</if>
+        </trim>
+        WHERE RENWID = #{taskId}
+    </update>
+
+    <delete id="deleteRecordById" parameterType="string">
+        DELETE FROM
+        transfer_task_info where RENWID = #{id}
+    </delete>
+
+
+    <select id="getRecords" parameterType="com.gl.springboot.entity.TransferTaskInfo" resultMap="resultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM transfer_task_info
+        <include refid="where_sql"/>
+        ORDER BY CHUANGJSJ DESC
+    </select>
+
+    <select id="getRecordById" parameterType="string" resultMap="resultMap">
+        SELECT
+        <include refid="columns"/>
+        FROM transfer_task_info
+        WHERE RENWID = #{id}
+    </select>
+
+</mapper>
