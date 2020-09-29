@@ -1,0 +1,11 @@
+db:
+  host: 127.0.0.1:3306
+  userName: root
+  password: guanlei
+  database: fms_v2.0.0.8
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: 123456
+  database: 1

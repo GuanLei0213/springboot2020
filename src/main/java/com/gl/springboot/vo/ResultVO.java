@@ -9,6 +9,8 @@ public class ResultVO<T> {
 
     private String message;
 
+    private long count;
+
     private T data;
 
     private ResultVO() {
@@ -22,10 +24,14 @@ public class ResultVO<T> {
     }
 
     public static ResultVO build(boolean success, String message, Object data){
-        ResultVO vo = new ResultVO();
-        vo.setSuccess(success);
-        vo.setMessage(message);
+        ResultVO vo = build(success,message);
         vo.setData(data);
+        return vo;
+    }
+
+    public static ResultVO build(boolean success, String message, long count,Object data){
+        ResultVO vo = build(success,message,data);
+        vo.setCount(count);
         return vo;
     }
 }

@@ -1,18 +1,18 @@
 package com.gl.springboot;
 
 import com.gl.springboot.entity.RedisData;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 @SpringBootTest
 class Springboot2020ApplicationTests {
-
-    @Test
-    void contextLoads() {
-    }
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -22,6 +22,13 @@ class Springboot2020ApplicationTests {
 
    /* @Autowired
     private RedisTemplate<String,String> redisTemplate;*/
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Test
+    void contextLoads() {
+    }
 
     /*@Test
     public void set(){
@@ -39,6 +46,14 @@ class Springboot2020ApplicationTests {
         redisData.setAge("22");
         redisData.setWorkName("张三的公司");
         redisTemplate.opsForValue().set("redisData",redisData);
+    }
+
+    @Test
+    public void dataSourceTest() throws SQLException {
+        System.out.println(dataSource.getClass());
+        Connection connection = dataSource.getConnection();
+        System.out.println(connection);
+        connection.close();
     }
 
 }

@@ -65,7 +65,6 @@
     <update id="updateRecord" parameterType="com.gl.springboot.entity.TransferTaskInfo">
         UPDATE transfer_task_info SET
         <trim suffix="" suffixOverrides=",">
-            <if test="createTime != null">CHUANGJSJ = #{createTime},</if>
             <if test="insertSuccess != null">RENWCRGLBSFCG = #{insertSuccess},</if>
             <if test="taskType != null">RENWLX = #{taskType},</if>
             <if test="isClean != null">SHIFQL = #{isClean},</if>
