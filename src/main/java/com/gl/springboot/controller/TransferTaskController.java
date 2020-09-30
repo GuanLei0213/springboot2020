@@ -4,6 +4,8 @@ import cn.hutool.core.bean.BeanUtil;
 import com.github.pagehelper.PageInfo;
 import com.gl.springboot.constant.Constants;
 import com.gl.springboot.entity.TransferTaskInfo;
+import com.gl.springboot.entity.UserInfo;
+import com.gl.springboot.logic.RedisLogic;
 import com.gl.springboot.logic.TransferTaskInfoLogic;
 import com.gl.springboot.vo.ResultVO;
 import com.gl.springboot.vo.param.TransferTaskInfoParamVO;
@@ -22,6 +24,9 @@ public class TransferTaskController {
 
     @Autowired
     private TransferTaskInfoLogic transferTaskInfoLogic;
+
+    @Autowired
+    private RedisLogic redisLogic;
 
     @PostMapping
     public ResultVO create(@Valid @RequestBody TransferTaskInfoParamVO paramVO){
@@ -47,6 +52,13 @@ public class TransferTaskController {
     public ResultVO delete(@RequestBody TransferTaskInfoParamVO paramVO){
         transferTaskInfoLogic.deleteTransferTaskInfo(copyProperties(paramVO));
         return ResultVO.build(Constants.TRUE,Constants.SUCCESS);
+    }
+
+    @PostMapping(value = "/redis")
+    public ResultVO opsForRedis(@RequestBody UserInfo userInfo){
+        redisLogic.setUserInfo(userInfo);
+        UserInfo userInfo1 = redisLogic.getUserInfo("userInfo-" + userInfo.getUserId());
+        return ResultVO.build(Constants.TRUE,Constants.SUCCESS,userInfo1);
     }
 
     private TransferTaskInfo copyProperties(TransferTaskInfoParamVO paramVO){
