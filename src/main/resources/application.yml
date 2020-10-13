@@ -1,7 +1,7 @@
 server:
   port: 8806
   servlet:
-    context-path: /bootDemo
+    context-path: /springboot
   tomcat:
     uri-encoding: UTF-8
 
@@ -13,6 +13,12 @@ spring:
   redis:
     host: ${redis.host}
     port: ${redis.port}
+  # cluster:
+  #    max-redirects: 3  #获取失败后最大重定向次数
+  #    nodes:
+  #     - 127.0.0.1:7001
+  #     - 127.0.0.1:7002
+  #     - 127.0.0.1:7003
     password: ${redis.password}
     timeout: 2000 #连接超时时间（毫秒）
     lettuce:
@@ -50,3 +56,8 @@ pagehelper:
   params: count=countSql
   reasonable: true
   support-methods-arguments: true
+
+#以下为系统自定义参数
+cleanTask:
+  fixedDelay: 1000
+  cron: 0/5 * * * * ?
