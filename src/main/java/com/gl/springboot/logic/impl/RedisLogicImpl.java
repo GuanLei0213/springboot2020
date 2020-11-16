@@ -8,7 +8,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RedisLogicImpl implements RedisLogic {
+public class
+RedisLogicImpl implements RedisLogic {
 
     @Autowired
     private RedisTemplate redisTemplate;
