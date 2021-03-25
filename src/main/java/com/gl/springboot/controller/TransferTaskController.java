@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.List;
 
 
@@ -29,7 +29,7 @@ public class TransferTaskController {
     private RedisLogic redisLogic;
 
     @PostMapping
-    public ResultVO create(@Valid @RequestBody TransferTaskInfoParamVO paramVO){
+    public ResultVO create(/*@Valid*/ @RequestBody TransferTaskInfoParamVO paramVO){
         transferTaskInfoLogic.insertTransferTaskInfo(copyProperties(paramVO));
         return ResultVO.build(Constants.TRUE,Constants.SUCCESS);
     }
