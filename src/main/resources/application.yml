@@ -47,17 +47,43 @@ spring:
     testOnBorrow: false
     testOnReturn: false
 
+  #设置返回的bean对象的时间属性格式化
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    defaultPropertyInclusion: non_null #不为空的属性才会序列化
+    serialization:
+      write-dates-as-timestamps: false #返回的java.util.date转换成timestamp
+    serialization-inclusion: NON_NULL
+    time-zone: Asia/Shanghai  #设置全局时区
+
+#整合mybatis
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.gl.springcloud.entity
 
+#整合mybatis-plus
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #输出SQL语句
+  mapper-locations: classpath:mapper/*Mapper.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: N
+      # 删除后
+      logic-delete-value: Y
+
+#整合pagehelper
 pagehelper:
   helper-dialect: mysql
   params: count=countSql
   reasonable: true
   support-methods-arguments: true
 
-#以下为系统自定义参数
+###################################以下为系统自定义参数################################
 cleanTask:
   fixedDelay: 1000
   cron: 0/5 * * * * ?

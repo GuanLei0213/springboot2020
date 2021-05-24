@@ -1,11 +1,11 @@
 db:
-  host: 127.0.0.1:3306
-  userName: root
-  password: guanlei
-  database: fms_v2.0.0.8
+  host: awschina-nx-cluster-dev3.cluster-crag5sximeqt.rds.cn-northwest-1.amazonaws.com.cn:3306
+  database: msad_gr_channel_00
+  userName: msad_dev3_rw
+  password: mYrOwFOUkrAML7h1
 
 redis:
   host: 127.0.0.1
   port: 6379
-  password: 123456
   database: 1
+  password: 123456

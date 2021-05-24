@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Transactional
@@ -51,5 +52,16 @@ public class TransferTaskInfoServiceImpl implements TransferTaskInfoService {
 		PageHelper.startPage(transferTaskInfo.getPage(),transferTaskInfo.getPageSize(),"CHUANGJSJ DESC");
 		List<TransferTaskInfo> records = transferTaskInfoDao.getRecords(transferTaskInfo);
 		return new PageInfo<>(records);
+	}
+
+	public static void main(String[] args) {
+		List<Long> longs = Arrays.asList(111L,222L,333L,444L);
+
+		List<Integer> integers = Arrays.asList(1,2,3,4);
+
+		final int index = longs.indexOf(222L);
+
+		final Integer integer = integers.get(index);
+		System.out.println(integer);
 	}
 }
