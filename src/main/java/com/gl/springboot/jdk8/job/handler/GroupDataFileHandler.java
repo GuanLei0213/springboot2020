@@ -58,13 +58,16 @@ public class GroupDataFileHandler extends AbstarctImportDataFileHandler {
 
     public void processor(){
         //1.查询数据库，获取未处理的文件记录
+        log.info("查询数据库，获取未处理的文件记录.......");
 
         //2.将filePath传入，执行调用链
+        log.info("获取未处理的文件记录，开始执行调用链.......");
         DataFileContext dataFileContext = new DataFileContext();
         ResultVO resultVO = ResultVO.build(Boolean.TRUE, "", new File("/filePath"));
         dataFileContext.setResultVOFile(resultVO);
         executor.accept(DataFileTypeEnum.GROUP,dataFileContext);
         deleteLocalFile(resultVO);
+        log.info("调用链处理结束.......");
     }
 
 }

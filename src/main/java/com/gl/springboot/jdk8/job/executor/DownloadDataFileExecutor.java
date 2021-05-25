@@ -28,6 +28,7 @@ public class DownloadDataFileExecutor implements BiConsumer<DataFileTypeEnum, Da
 
     @Override
     public void accept(DataFileTypeEnum fileType,DataFileContext dataFileContext) {
+        log.info("执行调用链1.......，文件下载............");
         ResultVO<File> resultVO = dataFileContext.getResultVOFile();
         if (!resultVO.isSuccess())
             return;

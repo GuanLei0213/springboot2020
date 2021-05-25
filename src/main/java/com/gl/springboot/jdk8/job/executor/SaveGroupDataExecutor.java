@@ -29,6 +29,7 @@ public class SaveGroupDataExecutor implements BiConsumer<DataFileTypeEnum, DataF
 
     @Override
     public void accept(DataFileTypeEnum dataFileTypeEnum, DataFileContext dataFileContext) {
+        log.info("执行调用链4.......，保存数据............");
         final ResultVO<List<ChannelGroupAgreement>> resultVO = dataFileContext.getResultVOList();
         if (!resultVO.isSuccess()){
             return;

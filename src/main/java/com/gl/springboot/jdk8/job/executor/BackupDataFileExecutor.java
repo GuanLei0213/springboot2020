@@ -28,6 +28,7 @@ public class BackupDataFileExecutor implements BiConsumer<DataFileTypeEnum, Data
 
     @Override
     public void accept(DataFileTypeEnum dataFileTypeEnum, DataFileContext dataFileContext) {
+        log.info("执行调用链2.......，文件备份............");
         ResultVO<File> resultVO = dataFileContext.getResultVOFile();
         if (!resultVO.isSuccess()){
             return;

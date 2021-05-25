@@ -30,6 +30,7 @@ import java.util.function.BiConsumer;
 public class ReadDataFileExecutor implements BiConsumer<DataFileTypeEnum, DataFileContext> {
     @Override
     public void accept(DataFileTypeEnum dataFileTypeEnum, DataFileContext dataFileContext) {
+        log.info("执行调用链3.......，文件读取解析数据............");
         ResultVO<File> resultVO = dataFileContext.getResultVOFile();
         if (!resultVO.isSuccess()){
             return;

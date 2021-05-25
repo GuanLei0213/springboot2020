@@ -28,6 +28,7 @@ public class DeleteDataFileExecutor implements BiConsumer<DataFileTypeEnum, Data
 
     @Override
     public void accept(DataFileTypeEnum dataFileTypeEnum,  DataFileContext dataFileContext) {
+        log.info("执行调用链5.......，删除远程文件............");
         ResultVO<File> resultVO = dataFileContext.getResultVOFile();
         if (!resultVO.isSuccess())
             return;
