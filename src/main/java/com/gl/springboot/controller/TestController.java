@@ -9,13 +9,13 @@
 package com.gl.springboot.controller;
 
 import com.gl.springboot.designpattern.observer.publisher.UserService;
+import com.gl.springboot.designpattern.strategy.LoginRequest;
+import com.gl.springboot.designpattern.strategy.LoginResponse;
+import com.gl.springboot.designpattern.strategy.servoce.LoginService;
 import com.gl.springboot.jdk8.job.handler.GroupDataFileHandler;
 import com.gl.springboot.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Description: 测试Controller
@@ -32,6 +32,9 @@ public class TestController {
     @Autowired
     private GroupDataFileHandler groupDataFileHandler;
 
+    @Autowired
+    private LoginService loginService;
+
     @GetMapping("/user/register/{userName}")
     public ResultVO userRegister(@PathVariable String userName){
         return userService.register(userName);
@@ -40,5 +43,10 @@ public class TestController {
     @GetMapping("/readFile")
     public void readFile(){
         groupDataFileHandler.processor();
+    }
+
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody LoginRequest loginRequest){
+        return loginService.login(loginRequest);
     }
 }
