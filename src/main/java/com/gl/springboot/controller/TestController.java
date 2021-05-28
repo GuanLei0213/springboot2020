@@ -9,6 +9,8 @@
 package com.gl.springboot.controller;
 
 import com.gl.springboot.designpattern.observer.publisher.UserService;
+import com.gl.springboot.designpattern.proxy.anno.ExceptionHandleAnno;
+import com.gl.springboot.designpattern.proxy.anno.InvokeRecordAnno;
 import com.gl.springboot.designpattern.strategy.LoginRequest;
 import com.gl.springboot.designpattern.strategy.LoginResponse;
 import com.gl.springboot.designpattern.strategy.servoce.LoginService;
@@ -16,6 +18,9 @@ import com.gl.springboot.jdk8.job.handler.GroupDataFileHandler;
 import com.gl.springboot.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description: 测试Controller
@@ -49,4 +54,27 @@ public class TestController {
     public LoginResponse login(@RequestBody LoginRequest loginRequest){
         return loginService.login(loginRequest);
     }
+
+    @GetMapping("/proxy")
+    @InvokeRecordAnno("测试代理模式")
+    public Map<String, Object> testProxy(@RequestParam String biz,@RequestParam String param) {
+        Map<String, Object> result = new HashMap<>(4);
+        result.put("id", 123);
+        result.put("nick", "之叶");
+        return result;
+    }
+
+    @GetMapping("/proxy2")
+    @ExceptionHandleAnno
+    @InvokeRecordAnno("测试代理模式")
+    public Map<String, Object> testProxy2(@RequestParam String biz, @RequestParam String param) {
+        if (biz.equals("abc")) {
+            throw new IllegalArgumentException("非法的 biz=" + biz);
+        }
+        Map<String, Object> result = new HashMap<>(4);
+        result.put("id", 123);
+        result.put("nick", "之叶");
+        return result;
+    }
+
 }
