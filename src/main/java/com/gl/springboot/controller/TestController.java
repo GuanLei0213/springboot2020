@@ -14,6 +14,7 @@ import com.gl.springboot.designpattern.proxy.anno.InvokeRecordAnno;
 import com.gl.springboot.designpattern.strategy.LoginRequest;
 import com.gl.springboot.designpattern.strategy.LoginResponse;
 import com.gl.springboot.designpattern.strategy.servoce.LoginService;
+import com.gl.springboot.entity.UserInfo;
 import com.gl.springboot.jdk8.job.handler.GroupDataFileHandler;
 import com.gl.springboot.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class TestController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private com.gl.springboot.aop.service.UserService userService2;
 
     @GetMapping("/user/register/{userName}")
     public ResultVO userRegister(@PathVariable String userName){
@@ -75,6 +79,11 @@ public class TestController {
         result.put("id", 123);
         result.put("nick", "之叶");
         return result;
+    }
+
+    @PostMapping("/add/userInfo")
+    public ResultVO addUserInfo(@RequestBody UserInfo userInfo){
+        return userService2.addUserInfo(userInfo);
     }
 
 }
